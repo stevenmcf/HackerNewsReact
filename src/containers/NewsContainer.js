@@ -6,39 +6,40 @@ import { useState, useEffect } from "react";
 const NewsContainer = () => {
 
     const [news, setNews] = useState([])
-    const [story, setStory] = useState({})
+    const [stories, setStories] = useState([])
     const [selectedStoryId, setSelectedStoryId] = useState({})
 
     useEffect(() => {
-    getNews()},[]
+    getStories()},[]
     )
 
     // 25344354 - use this for checking API
-    const getNews = () => {
+    const getStories = () => {
         fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
-        .then(res => res.json())
-        .then(news => setNews(news))
-        .then(news.forEach(selectedStoryId => {
-            fetch(`https://hacker-news.firebaseio.com/v0/item/${selectedStoryId}.json`)
             .then(res => res.json())
-            .then(story => setStory(story))
+                .then(news => {
 
-            Promise.all([news, story]).then((values) => {
-                console.log(values)
-            })
-        }))
+                    const newsStories = news.slice(0, 20).map((id) => {
+                        return fetch (`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+                            .then(res => res.json())
+            });
+
+            Promise.all(newsStories)
+            .then((stories) => setStories(stories))
+        })
             
-        
+    }        
     return (
         <>
         <h1>This is the news container....</h1>
         <Title/>
+        {stories}
         <StoryList/>
         </>
     );
 
 
-}
+
 }
 
 export default NewsContainer;
