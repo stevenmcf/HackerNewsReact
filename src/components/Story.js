@@ -1,6 +1,6 @@
 const Story = ({story}) => {
     return (
-        <p>{story.title}</p>
+        <p>News Headline: {story.title}</p>
     );
 };
 export default Story;

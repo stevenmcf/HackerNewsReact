@@ -1,6 +1,6 @@
 import Filter from "../components/Filter";
 import StoryList from "../components/StoryList";
-import Title from "../components/Title";
+// import Title from "../components/Title";
 import { useState, useEffect } from "react";
 
 const NewsContainer = () => {
@@ -13,8 +13,9 @@ const NewsContainer = () => {
     const [searchedStory, setSearchedStory] = useState("")
 
     function handleFilterStories(event){
+        setFilteredStories("")
         setSearchedStory(event.target.value)
-        const results = stories.filter(story => story.title.includes(searchedStory))
+        const results = stories.filter(story => story.title.toLowerCase().includes(searchedStory))
         setFilteredStories(results)
     } 
 
@@ -34,20 +35,19 @@ const NewsContainer = () => {
             });
 
             Promise.all(newsStories)
-            .then((stories) => {
+                .then((stories) => {
                 setStories(stories)
                 setFilteredStories(stories)
             })
             
-            .then(setLoaded(true))
+                    .then(setLoaded(true))
         })
             
     }        
     return (
         <>
-        <h1>This is the news container....</h1>
-            <Title />
-            <Filter handleFilterStories={handleFilterStories}/>
+        <h1>H4CK3R N3WZ</h1>
+            <Filter searchedStory = {searchedStory} handleFilterStories={handleFilterStories}/>
             <StoryList stories={filteredStories} loaded={loaded}/>
         </>
     );

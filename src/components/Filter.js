@@ -1,8 +1,8 @@
-const Filter = ({handleFilterStories}) => {
+const Filter = ({handleFilterStories, searchedStory}) => {
     return (
         <>
-        <h2>Filter stories here</h2>
-        <input type="text" placeholder="search here" onChange={handleFilterStories}/>
+        <h2>Search for your Good News Story:</h2>
+        <input type="text" value={searchedStory} placeholder="search here" onChange={handleFilterStories}/>
         </>
     );
 };
