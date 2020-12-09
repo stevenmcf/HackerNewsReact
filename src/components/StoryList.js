@@ -1,6 +1,9 @@
 import Story from './Story'
 
-const StoryList = ({stories}) => {
+const StoryList = ({stories, loaded}) => {
+    if(!loaded) {
+        return <p>loading...</p>
+    }
     
     const storyList = stories.map((story) => {
         return(

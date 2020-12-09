@@ -8,9 +8,18 @@ const NewsContainer = () => {
     const [news, setNews] = useState([])
     const [stories, setStories] = useState([])
     const [selectedStoryId, setSelectedStoryId] = useState({})
+    const [loaded, setLoaded] = useState(false)
+    const [filteredStories, setFilteredStories] = useState([])
+    const [searchedStory, setSearchedStory] = useState("")
+
+    function handleFilterStories(event){
+        setSearchedStory(event.target.value)
+        const results = stories.filter(story => story.title.includes(searchedStory))
+        setFilteredStories(results)
+    } 
 
     useEffect(() => {
-    getStories()},[]
+    getStories()},[setSearchedStory]
     )
 
     // 25344354 - use this for checking API
@@ -25,15 +34,21 @@ const NewsContainer = () => {
             });
 
             Promise.all(newsStories)
-            .then((stories) => setStories(stories))
+            .then((stories) => {
+                setStories(stories)
+                setFilteredStories(stories)
+            })
+            
+            .then(setLoaded(true))
         })
             
     }        
     return (
         <>
         <h1>This is the news container....</h1>
-            <Title/>
-            <StoryList stories={stories}/>
+            <Title />
+            <Filter handleFilterStories={handleFilterStories}/>
+            <StoryList stories={filteredStories} loaded={loaded}/>
         </>
     );
 

@@ -1,6 +1,9 @@
-const Filter = () => {
+const Filter = ({handleFilterStories}) => {
     return (
-        <h2>This will be a filter...</h2>
+        <>
+        <h2>Filter stories here</h2>
+        <input type="text" placeholder="search here" onChange={handleFilterStories}/>
+        </>
     );
 };
 export default Filter;

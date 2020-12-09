@@ -1,10 +1,10 @@
-import Filter from './Filter'
+// import Filter from './Filter'
 
 const Title = () => {
     return (
         <>
-        <h2>This will be the title component</h2>
-        <Filter/>
+        <h2>Hacker News Stories</h2>
+        {/* <Filter handleFilterStories={handleFilterStories}/> */}
         </>
     );
 };
