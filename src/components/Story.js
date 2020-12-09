@@ -1,6 +1,6 @@
-const Story = () => {
+const Story = ({story}) => {
     return (
-        <p>Insert good news story here</p>
+        <p>{story.title}</p>
     );
 };
 export default Story;
