@@ -25,22 +25,20 @@ const NewsContainer = () => {
 
             Promise.all([news, story]).then((values) => {
                 console.log(values)
-            }
+            })
+        }))
             
-        ))
-    }
-
-
+        
     return (
         <>
         <h1>This is the news container....</h1>
         <Title/>
-
         <StoryList/>
         </>
     );
 
 
-};
+}
+}
 
 export default NewsContainer;
